@@ -10,6 +10,8 @@
 }
 .ProductComponent{
     width: 50%;
+    font-size: 15.5px;
+    padding: 30px;
     
 }
 
@@ -50,12 +52,26 @@
 }
 .ListItem{
     font-size: 30.5px;
-    line-height: 4cm;
     padding-bottom: 20px;
 }
 .List{
     background-color: lavender;
+    margin:0 2px;
    
 }
- 
- 
+#quantity{
+   text-align: right;
+   padding: 5px 20px;
+   margin:  0 0 0 5px;
+   font-size: 19.5px;
+}
+.QuantityButton {
+    margin: 0 0 0 5px ;
+    font-size: 19px;
+    cursor: pointer;
+    width: 29px;
+    height: 29px;
+    float: right;
+    text-align: center;
+
+  }
