@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Product from './Product.js';
+import './css/mystyles.css';
 
 function ProductList(props) {
 
@@ -18,7 +19,7 @@ function ProductList(props) {
     return (
         <ol className="List">{listItems}</ol>
     );
-
+ 
 }
 
 export default ProductList

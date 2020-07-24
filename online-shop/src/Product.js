@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
+import './css/mystyles.css';
 
 function Product(props) {
 
@@ -13,15 +13,15 @@ function Product(props) {
   
 
 
-    return (<div className="ProductComponent">
+    return (<div className="box ProductComponent title">
         <div className="ProductDetails">
-            <div className="ProductName">{props.name}</div>
+            <div className="ProductName has-text-primary">{props.name}</div>
             <div className="ProductCategory">{props.category}</div>
-            <div className="ProductPrice"> ${props.price}</div>
+            <div className="has-text-primary"> ${props.price}</div>
             
-            <div id="quantity">Quantity: {quantity}
-                <button className="QuantityButton" onClick={handleClick}>+</button>
-                <button className="QuantityButton" onClick={handleClick2}>-</button>
+            <div id="quantity">Quantity:{quantity}
+                <button className="QuantityButton button is-primary" onClick={handleClick}>+</button>
+                <button className="QuantityButton button is-primary" onClick={handleClick2}>-</button>
             </div>
         </div>
         <div className="ProductDescription">{props.description}</div>
