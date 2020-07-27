@@ -1,64 +1,71 @@
-.ProductDetails {
+.productDetails {
  
-    border-bottom: 1px solid #dfe5e9;
-    padding-bottom: 17px;
+    border-bottom: 1px solid #0d0d0e;
+    padding-bottom: 60px;
     padding-left: 16px;
     padding-top: 16px;
     position: relative;
-    background: #fff
+
  
 }
-.ProductComponent{
+body{
+    background-color: lavender;
+}
+.productComponent{
     width: 50%;
     font-size: 15.5px;
     padding: 30px;
-    
+    text-align: left;
+    margin-top: 40px;
+    background-color: lavender;
     
 }
 
-.ProductCategory{
+.productCategory{
     font-size: 18px;
     margin: 0;
     line-height: 1cm;
     
 }
  
-.ProductPrice, .ProductName {
+.productPrice{
  
-    color: #21c2f8;
+   /* color: #21c2f8;*/
     /*font-family: Lato, sans-serif;*/
     font-size: 25px;
     line-height: 20px;
    
  
 }
-.ProductPrice{
+.productPrice{
     line-height: 1cm;
 }
-.ProductName {
+.productName {
  
     font-size: 30px;
     margin: 0;
-    color:#000080	;
+    line-height: 20px;
+    /*color:#000080	;*/
    
  
 }
-.ProductDescription {
+.productDescription {
  
     font-size: 15.5px;
     line-height: 20px;
-    padding: 10px 14px 16px 19px;
-    background: #fff
+    padding: 30px 14px 16px 19px;
+
+
  
 }
-.ListItem{
+.listItem{
     font-size: 30.5px;
     padding: 20px;
     margin-left: 30px;
 }
-.List{
+.myList{
     background-color: lavender;
-    margin:0 2px;
+    margin:50px 2px;
     padding-left: 20px;
    
 }
@@ -76,5 +83,20 @@
     height: 29px;
     float: right;
     text-align: center;
+   
 
   }
+  .buttonWrapper{
+    float: right;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  li a{
+    text-decoration: none;
+    color: white;
+  }
+ 
