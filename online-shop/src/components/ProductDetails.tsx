@@ -1,28 +1,10 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import '../index.css';
 import Button from '@material-ui/core/Button';
-import Div from '@material-ui/core/Divider';
-import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
-//import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { Link, BrowserRouter as Router} from 'react-router-dom'
-
-
-
-const useStyles = makeStyles(theme =>({
-    button: {
-        margin: "5px 5px",
-        
-      },
-      cartButton:{
-          alignContent:'left',
-      },
-      link:{
-        textDecoration: "none",
-      }
-  
-    }));
+import {addToCart} from './ShoppingCart'
+import {useStyles} from '../styles/ProductDetailsStyle'
     
 
 
@@ -35,18 +17,49 @@ interface ProductEntity{
 
 }
 
-function ProductDetails(props: ProductEntity) {
+const ProductDetails = (props: ProductEntity) => {
+   
+   
+    const url = `http://localhost:4000/products/${props.id}`;
     const classes = useStyles();
     const cartItems =[]
-    //hooks
+    const [isError, setIsError] = useState(false);
+
+    // quantity with hook
     const[quantity, setQuantity]=useState(0);
-    const handleClick = () => setQuantity(quantity + 1)
-    const handleClick2 = () => {if (quantity>0){setQuantity(quantity-1)}} 
-    const addToShoppingCart=()=> { if (quantity>0) {cartItems.push(props); 
-                                    alert("Added to Shopping Cart")}
-                                    else {alert("Quantity is 0")}}
+    const handleClick = () => setQuantity(quantity + 1);
+    const handleClick2 = () => quantity > 0 && setQuantity(quantity - 1);
     
-        return (
+    function addToShoppingCart () {
+         if (quantity>0) {
+             addToCart(props, quantity)
+             alert("Added to Shopping Cart")}
+        else {
+            alert("Quantity is 0")}}
+   
+
+
+    //const deleteItem =async() => await fetch(url,{method: 'DELETE'}).then(res => res.json());  
+    function deleteProduct(){
+        const deleteProductbyId = async () =>{
+            setIsError(false);
+
+            try{
+                fetch(url, {
+                    method: 'DELETE',
+                })
+                    .then(res => res.text())
+ 
+                alert("deleted")  
+            }
+            catch(error){
+                alert(error)
+            }
+        };
+        deleteProductbyId();
+    }
+    
+        return (  //indentation  //plus ceva comp typography +div
             <div className="productComponent">
                 <div className="productDetails">
                 <Typography color= "primary">
@@ -56,19 +69,19 @@ function ProductDetails(props: ProductEntity) {
                 <Typography color= "primary">
                     <div className="productPrice"> ${props.price}</div>
                 </Typography>
-            
                 <div id="quantity">Quantity:{quantity}
-                    <Button variant="contained" color="primary" className={classes.button}  onClick={handleClick}>+</Button>
                     <Button variant="contained" color="primary" className={classes.button} onClick={handleClick2}>-</Button>
+                    <Button variant="contained" color="primary" className={classes.button} onClick={handleClick}>+</Button>
                 </div>
                 <div className="buttonWrapper">
-                <Button variant="contained" color="primary" className="cartButton" onClick={addToShoppingCart}>Add to ShoppingCart</Button>
+                     <Button variant="contained" color="primary" className="cartButton" onClick={addToShoppingCart}>Add to ShoppingCart</Button>
                 </div>
-           
             </div>
-            <div className="productDescription">{props.description}</div>
-            <Link to={`/product`} className={classes.link} ><Button variant="contained" color="primary"className={classes.button}>Back</Button></Link>
-            
+                <div className="productDescription">{props.description}</div>
+                <Link to={`/product`} className={classes.link} >
+                    <Button variant="contained" color="primary"className={classes.button}>Back</Button>
+                </Link>
+                <Button variant="contained" color="primary"className={classes.button} onClick={deleteProduct}>Delete</Button>
 
         </div>);
 

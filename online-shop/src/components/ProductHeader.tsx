@@ -1,24 +1,9 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import '../index.css';
 import Button from '@material-ui/core/Button';
-import Div from '@material-ui/core/Divider';
-import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
-//import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { Link, BrowserRouter as Router} from 'react-router-dom'
-
-
-
-const useStyles = makeStyles(theme =>({
-    button: {
-        margin: "0 0 0 5px",
-        float: "right",
-        verticalAlign: "middle",
-      },
-  
-    }));
-
+import {useStyles} from '../styles/ProductHeaderStyle'
 
 interface ProductType{
     id: number,
@@ -27,7 +12,7 @@ interface ProductType{
 
 }
 
-function ProductName(props: ProductType) {
+const ProductHeader = (props: ProductType) => {
     const classes = useStyles();
         return (
             <div className="productComponent">
@@ -45,4 +30,4 @@ function ProductName(props: ProductType) {
    
 }
 
-export default ProductName ;
+export default ProductHeader ;

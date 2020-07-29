@@ -1,3 +1,4 @@
+
 const ProductAPI = {
     products: [{ id: 1, name: 'Product Name 1', category: 'Product Category 1', description: 'A short description', price: 150 },
     { id: 2, name: 'Product Name 2', category: 'Product Category 2', description: 'A short description', price: 54.2 },
@@ -9,6 +10,10 @@ const ProductAPI = {
       return this.products.find(isProduct)
     }
   }
+
   
   export default ProductAPI
+
+
+
   
