@@ -1,0 +1,22 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+ li a{
+    text-decoration: none;
+    color: white;
+  }
+ 
+.listItem{
+    font-size: 30.5px;
+    padding: 20px;
+    margin-left: 30px;
+}
+.myList{
+    background-color: lavender;
+    margin:50px 2px;
+    padding-left: 20px;
+   
+}
