@@ -1,8 +1,9 @@
-import '../index.css';
+import '../css/ListCSS.css';
 import ProductHeader from './ProductHeader'
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux'
 
-interface ProductType{
+interface ProductType {
     id: number,
     name: string,
     category: string,
@@ -10,8 +11,8 @@ interface ProductType{
     description: string;
 }
 
-interface ProductListType{
-   products: ProductType[];
+interface ProductListType {
+    products: ProductType[];
 }
 
 const ProductList = (props: ProductListType) => {
@@ -19,44 +20,46 @@ const ProductList = (props: ProductListType) => {
     const [isLoading, setIsLoading] = useState(false);
     const url = 'http://localhost:4000/products'
 
+    const getItems = async () => await fetch(url).then(res => res.json());
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsLoading(true);
 
-    const getItems = async() => await fetch(url).then(res => res.json());
-    useEffect(()=> {
-      const fetchData= async() => {
-        setIsLoading(true);
-        
-        getItems().then(data => setItems(data));
+            getItems().then(data => setItems(data));
 
-  
-       // setData(result.data);
-        setIsLoading(false);
-  
-      };
-      fetchData();
+
+            // setData(result.data);
+            setIsLoading(false);
+
+        };
+        fetchData();
     }, [url]);
-    
-  
-    //const products = ProductAPI.all();
+
 
     const products = items
-    const listItems = products.map((product) => <li key = {product.id} className="listItem">
+    const listItems = products.map((product) => <li key={product.id} className="listItem">
         <ProductHeader id={product.id}
-                       name={product.name}
-                       category ={product.category}
-                        
-                 
+            name={product.name}
+            category={product.category}
+
+
         ></ProductHeader>
-        
-        </li>
+
+    </li>
     );
 
     return (
-          <div>
+        <div>
             <ol className="myList">{listItems}</ol>
-          </div>
-         
+        </div>
+
     );
 
 }
+/*
+const mapStateToProps = (state) => {
+    return state
+};
 
+export default connect(mapStateToProps, actionCreators)(ProductList)*/
 export default ProductList
