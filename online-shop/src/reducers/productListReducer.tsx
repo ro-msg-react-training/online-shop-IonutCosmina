@@ -38,9 +38,7 @@ const defaultState : IProductsState ={
    
    }
     
-const rootReducer = combineReducers({
-    products: mainReducer
-}) 
- export default rootReducer
+
+ export default mainReducer
  //export const getProducts = state => state.products;
  

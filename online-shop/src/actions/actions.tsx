@@ -1,4 +1,4 @@
-import { ProductEntity } from "../components/ProductDetailsPage"
+import {ProductEntity} from "../components/ProductDetailsPage"
 
 export const GET_PRODUCTS ='GET_PRODUCTS'
 export const FETCH_PRODUCTS_REQUEST='FETCH_PRODUCTS_REQUEST'
@@ -13,8 +13,8 @@ export function loadProducts(){
         return fetch('http://localhost:4000/products')
         .then(response => response.json())
         .then(json => {
-            dispatch(getProducts(json.products));
-            return json.products;
+            dispatch(getProducts(json));
+            return json;
          /* .then(response => {
             const products=response.json
             dispatch(getProducts(products))
@@ -33,7 +33,7 @@ export const fetchProductsRequest = ()=>{
         type: FETCH_PRODUCTS_REQUEST
     }
 }
-export const getProducts = products =>{
+export const getProducts = (products) =>{
     return {
         type: GET_PRODUCTS,
         payload: products

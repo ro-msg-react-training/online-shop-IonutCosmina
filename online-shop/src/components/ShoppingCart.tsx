@@ -1,8 +1,12 @@
-import { ProductEntity, CartItems } from './ProductDetailsPage'
+import { ProductEntity} from './ProductDetailsPage'
 import React, { useState} from 'react';
 import { TableContainer, TableHead, Table, TableRow, TableBody, Button, makeStyles, TableCell } from '@material-ui/core'
 import { useStyles } from '../styles/ShoppingCartStyle'
+export interface CartItems {
+    product: ProductEntity,
+    quantity: number;
 
+}
 let cartItems: CartItems[] = []
 
 export const addToCart = (product: ProductEntity, quantity: number) => {

@@ -3,6 +3,14 @@ import ProductDetails from './ProductDetails';
 import React, { Fragment, useState, useEffect } from 'react';
 import { RouteComponentProps } from "react-router-dom";
 import ProductEntity from './ProductDetails'
+import { getProductDetails } from '../actions/ProductDetailAction';
+import { AppState } from '../store';
+import { Dispatch } from 'redux';
+import {productDetailsLoading } from '../actions/ProductDetailAction';
+import { connect } from 'react-redux';
+import ProductDetailsPageDumb from "./ProductDetailPageDumb"
+import { Container, CircularProgress } from '@material-ui/core';
+import { isElementOfType } from 'react-dom/test-utils';
 
 interface productId {
     id: string;
@@ -17,62 +25,64 @@ export interface ProductEntity {
     description: string;
 
 }
-export interface CartItems {
-    product: ProductEntity,
-    quantity: number;
-
+interface Props {
+    productDetail: ProductEntity,
+    isLoading: boolean,
+    productDetailsLoading : (loadingStatus: boolean) => void,
+    getProductDetails : (productDetail: ProductEntity) => void,
+    matching: RouteComponentProps<any>,
+    
 }
-const ProductDetailsPage = (props: RouteComponentProps<productId>) => {
-    const product = {} as ProductEntity
-    const [items, setItems] = useState(product);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
+interface OwnProps{
+    matching: RouteComponentProps<any>;
+}
+
+const ProductDetailsPage: React.FC <Props> = (props: Props) =>{
+    
+   
+   
+   
+    
+    useEffect (()=>{
+        fetch(`http://localhost:4000/products/${props.matching.match.params.id}`)
+        .then(response => response.json())
+        .then(data =>{
+            getProductDetails(data);
+            productDetailsLoading(false);
+        });
 
 
-    const param = props.match.params
-    const url = `http://localhost:4000/products/${param.id}`;
+    }, [])
 
-
-    // console.log(url)
-    const getItem = async () => await fetch(url).then(res => res.json());
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsError(false);
-            setIsLoading(true);
-
-            try {
-                getItem().then(data => setItems(data));
-            } catch (error) {
-                setIsError(true);
-            }
-
-            setIsLoading(false);
-        };
-
-        fetchData();
-    }, [url]);
-
-
-    //const product=ProductAPI.get(parseInt(props.match.params.number,4))
-
-    const prod =
-
-        <ProductDetails id={items.id}
-            name={items.name}
-            category={items.category}
-            description={items.description}
-            price={items.price}
-
-        ></ProductDetails>
-
-
-
+    console.log(props)
+    if (props.isLoading) {
+        return (
+            <Container>
+                <CircularProgress />
+            </Container>
+        );
+    }
     return (
-        <div>
-            {prod}
-        </div>
+            <ProductDetailsPageDumb product={props.productDetail}></ProductDetailsPageDumb>
     )
 
 }
-export default ProductDetailsPage
+
+const mapStateToProps = (state: AppState, ownProps: OwnProps) => ({
+        productDetail : state.productDetails.product,
+        isLoading : state.productDetails.isLoading,
+        matching: ownProps.matching,
+})
+
+const mapDispatchToProps = (dispatch : Dispatch) =>({
+    getProductDetails:(productDetail : ProductEntity) => dispatch(getProductDetails(productDetail)),
+    productDetailsLoading:(loadingStatus: boolean) => dispatch(productDetailsLoading(loadingStatus))
+   
+});
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(ProductDetailsPage);
+//export default ProductDetailsPage

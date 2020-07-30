@@ -21,7 +21,7 @@ interface ProductListType {
 }
 export interface IProps {
   
-  prodData: ProductEntity;
+ // prodData: ProductEntity;
   loadProducts(): any
 }
 function ProductList <IProps> ({prodData,loadProducts}){
@@ -68,14 +68,20 @@ function ProductList <IProps> ({prodData,loadProducts}){
         <div>
           {prodData &&
             prodData.products &&
-            prodData.products.map(prod => <p>{prod.name}</p>)}
+            prodData.products.map(prod =><ProductHeader key= {prod.id}
+              id={prod.id}
+              name={prod.name}
+              category={prod.category}
+  
+  
+          ></ProductHeader>)}
         </div>
       </div>
     )
 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state : IProductsState) => {
   return{
     prodData: state.products
   }

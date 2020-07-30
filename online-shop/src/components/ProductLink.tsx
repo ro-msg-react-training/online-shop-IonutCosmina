@@ -6,7 +6,9 @@ import { Switch, Route } from 'react-router-dom'
 const ProductLink = () => (
     <Switch>
         <Route exact path='/product' component={ProductList} />
-        <Route path='/product/:id' component={ProductDetailsPage} />
+        <Route path='/product/:id' render = {renderProps => (
+            <ProductDetailsPage matching ={renderProps}></ProductDetailsPage>
+        )} />
     </Switch>
 )
 
