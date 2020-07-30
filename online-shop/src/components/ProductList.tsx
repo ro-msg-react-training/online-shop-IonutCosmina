@@ -2,6 +2,11 @@ import '../css/ListCSS.css';
 import ProductHeader from './ProductHeader'
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'
+import * as actionCreators from '../actions/actions'
+import {loadProducts} from '../actions/actions'
+import { render } from '@testing-library/react';
+import IProductState, { IProductsState } from '../reducers/productListReducer'
+import { ProductEntity } from './ProductDetailsPage';
 
 interface ProductType {
     id: number,
@@ -14,9 +19,13 @@ interface ProductType {
 interface ProductListType {
     products: ProductType[];
 }
-
-const ProductList = (props: ProductListType) => {
-    const [items, setItems] = useState([]);
+export interface IProps {
+  
+  prodData: ProductEntity;
+  loadProducts(): any
+}
+function ProductList <IProps> ({prodData,loadProducts}){
+   /* const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const url = 'http://localhost:4000/products'
 
@@ -33,10 +42,15 @@ const ProductList = (props: ProductListType) => {
 
         };
         fetchData();
-    }, [url]);
+    }, [url]);*/
 
+    useEffect (() => {
+     loadProducts()
 
-    const products = items
+    },[])
+   
+    /*const products = prodData.products
+    console.log(products)
     const listItems = products.map((product) => <li key={product.id} className="listItem">
         <ProductHeader id={product.id}
             name={product.name}
@@ -46,20 +60,33 @@ const ProductList = (props: ProductListType) => {
         ></ProductHeader>
 
     </li>
-    );
+    );*/
 
     return (
+      <div>
+        <h2> {console.log(prodData)}</h2>
         <div>
-            <ol className="myList">{listItems}</ol>
+          {prodData &&
+            prodData.products &&
+            prodData.products.map(prod => <p>{prod.name}</p>)}
         </div>
-
-    );
+      </div>
+    )
 
 }
-/*
+
 const mapStateToProps = (state) => {
-    return state
+  return{
+    prodData: state.products
+  }
+    
 };
 
-export default connect(mapStateToProps, actionCreators)(ProductList)*/
-export default ProductList
+const mapDispatchToProps = dispatch => {
+  return{
+    loadProducts:()=> dispatch(loadProducts())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ProductList)
+//export default ProductList

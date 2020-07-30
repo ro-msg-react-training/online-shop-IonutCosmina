@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { Provider } from 'react-redux';
+import store from './store';
 import * as serviceWorker from './serviceWorker';
 import ProductList from './components/ProductList';
 import ProductListType from './components/ProductList';
@@ -10,6 +12,7 @@ import {
 } from "react-router-dom";
 
 ReactDOM.render(
+
   <Router>
     <App />
   </Router>,
