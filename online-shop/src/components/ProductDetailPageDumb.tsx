@@ -10,10 +10,10 @@ const ProductDetailsDumb: React.FC<Props> = (props: Props) => {
 
     return (
         <ProductDetails id={props.product.id}
-        name={props.product.name}
-        category={props.product.category}
-        description={props.product.description}
-        price={props.product.price}
+            name={props.product.name}
+            category={props.product.category}
+            description={props.product.description}
+            price={props.product.price}
 
     ></ProductDetails>
     );

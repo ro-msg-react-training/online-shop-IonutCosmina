@@ -38,23 +38,19 @@ interface OwnProps{
 }
 
 const ProductDetailsPage: React.FC <Props> = (props: Props) =>{
-    
-   
-   
-   
-    
+
     useEffect (()=>{
         fetch(`http://localhost:4000/products/${props.matching.match.params.id}`)
         .then(response => response.json())
         .then(data =>{
-            getProductDetails(data);
-            productDetailsLoading(false);
+            props.getProductDetails(data);
+            props.productDetailsLoading(false);
         });
 
 
     }, [])
-
-    console.log(props)
+    
+    
     if (props.isLoading) {
         return (
             <Container>
@@ -85,4 +81,4 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps,
 )(ProductDetailsPage);
-//export default ProductDetailsPage
+

@@ -17,7 +17,7 @@ export const ProductDetailsReducer = (
     state: ProductDetailsState = initialState,
     action: ProductDetailAction,
 ): ProductDetailsState => {
-    console.log(action)
+    console.log(action.type)
     switch (action.type) {
         case ProdDetailActionTypes.PRODUCT_DETAIL_LOADING: {
             return {

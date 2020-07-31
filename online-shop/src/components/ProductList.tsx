@@ -7,6 +7,9 @@ import {loadProducts} from '../actions/actions'
 import { render } from '@testing-library/react';
 import IProductState, { IProductsState } from '../reducers/productListReducer'
 import { ProductEntity } from './ProductDetailsPage';
+import { Link, BrowserRouter as Router } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
+import { useStyles } from '../styles/ProductListStyle'
 
 interface ProductType {
     id: number,
@@ -25,6 +28,7 @@ export interface IProps {
   loadProducts(): any
 }
 function ProductList <IProps> ({prodData,loadProducts}){
+  const classes = useStyles();
    /* const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const url = 'http://localhost:4000/products'
@@ -66,6 +70,9 @@ function ProductList <IProps> ({prodData,loadProducts}){
       <div>
         <h2> {console.log(prodData)}</h2>
         <div>
+            <Link to={`/product/add`} className={classes.link} >
+                <Button variant="contained" color="primary" className={classes.button}>ADD</Button>
+            </Link>
           {prodData &&
             prodData.products &&
             prodData.products.map(prod =><ProductHeader key= {prod.id}

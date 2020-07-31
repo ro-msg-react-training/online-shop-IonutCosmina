@@ -62,8 +62,11 @@ const ProductDetails = (props: ProductEntity) => {
         deleteProductbyId();
     }
 
-    return (  //TODO Typography and div a component
+    return (
         <div className="productComponent">
+             <Link to={`/product/edit/${props.id}`} className={classes.link} >
+                <Button variant="contained" color="primary" className={classes.button}>Edit</Button>
+            </Link>
             <div className="productDetails">
                 <TypographyDisplay className='productName' productdetail={props.name}></TypographyDisplay>
                 <div className="productCategory">{props.category}</div>
